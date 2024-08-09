@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QRCode Generator</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* width:60vw; */
+        /* border: 2px solid black; */
+        height: 400px;
+      }
+      .container {
+        border: 2px solid black;
+        width: 60%;
+        /* height: 400px; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+      }
+      #url {
+        background-color: #b1abab1c;
+        border: 1px solid gray;
+        border-radius: 8px;
+        width: 20rem;
+        padding: 10px;
+      }
+      .qr-box {
+        width: 200px;
+        height: 200px;
+        /* border: 2px solid black; */
+      }
+      #gen {
+        padding: 10px;
+        box-shadow: 1px 1px 1px 1px #54585c;
+        border: 1px solid gray;
+        border-radius: 6px;
+        padding: 10px 15px;
+        cursor: pointer;
+      }
+      #gen:active{
+        box-shadow: none;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="qr-box"></div>
+      <input type="text" id="url" placeholder="Enter URL Name.." />
+      <button id="gen">Generate</button>
+    </div>
+
+
+    <script>
+
+      let qrbox = document.querySelector(".qr-box");
+      let urlbox = document.querySelector("#url");
+      let genBtn = document.querySelector("#gen");
+
+      
+
+      
+
+      let img = document.createElement("img");
+      img.setAttribute("src","");
+
+      genBtn.addEventListener("click", (e)=>{
+        e.stopPropagation();
+
+        if(urlbox.vlaue != ''){
+          let url = urlbox.value;
+          let qrsrc = `http://api.qrserver.com/v1/create-qr-code/?data=${url}&size=200x200`;
+          img.setAttribute("src",qrsrc);
+
+          qrbox.append(img);
+        }
+
+
+        
+      })
+    </script>
+  </body>
+</html>
